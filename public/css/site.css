@@ -1,0 +1,52 @@
+/*  Kaki-Blog, lightweight blog engine
+*   Copyright (C) 2016  Kakise <me@kakise.xyz>
+*
+*   This file is part of Kaki-Blog.
+*
+*   Kaki-Blog is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
+*
+*   Kaki-Blog is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with Kaki-Blog.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+div .uk-grid {
+	margin-bottom: 50px;
+}
+
+.lead {
+	font-size: 16px;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	height: 50px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #031120;
+}
+
+footer p {
+	text-align: center;
+}
+
+.tag {
+	background-color: #3a6a96;
+	text-align: center;
+	padding: 3px;
+	margin: 2px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}

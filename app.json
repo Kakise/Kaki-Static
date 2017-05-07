@@ -1,0 +1,44 @@
+{
+	"name": "Kaki-Static",
+	"description": "Blog powered by Node.JS and Contentful",
+	"keywords": [
+		"Blog",
+		"Node",
+		"Contentful"
+	],
+	"scripts": {},
+	"env": {
+		"WORKERS": {
+			"description": "The number of processes to run",
+			"value": "2"
+		},
+		"ADDRESS": {
+			"description": "Web adress of the website"
+		},
+		"CDApi": {
+			"description": "Contentful's Content Delivery API key"
+		},
+		"CPApi": {
+			"description": "Contentful's Content Preview API key"
+		},
+		"SpaceID": {
+			"description": "Contentful's Space ID"
+		},
+		"disqus": {
+			"description": "Disqus' username (optional)"
+		},
+		"NODE_ENV": {
+			"description": "Can be 'production' or 'developement'",
+			"value": "production"
+		}
+	},
+	"formation": {},
+	"addons": [
+
+	],
+	"stack": "heroku-16",
+	"repository": "https://github.com/Kakise/Kaki-Static",
+	"buildpacks": [{
+		"url": "heroku/nodejs"
+	}]
+}

@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  h2 #{article.title}
+  
+  div Tags: &nbsp;
+    each tag in article.tags
+      span(class="tag") #{tag}
+  br
+  if (article.source)
+    i Source: #{article.source}
+  
+  article(class="uk-article")!= article.article
+  
+  h4
+    a(href="/") Retour à l'accueil

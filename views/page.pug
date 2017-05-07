@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+ h2 #{page.title}
+ 
+ article(class="uk-article")!= page.content
+ 
+ h4
+ a(href="/") Retour à l'accueil

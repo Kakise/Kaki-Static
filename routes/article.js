@@ -1,0 +1,43 @@
+const express = require('express');
+const router = express.Router();
+const article = require('../services/article.js');
+const marked = require('marked');
+
+function disqus(id) {
+	return `
+    <div id="disqus_thread"></div>
+    <script>
+    	var disqus_config = function () {
+			this.page.url = window.location.href;
+			this.page.identifier = '${id}';
+		};
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://${process.env.disqus}.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>`;
+}
+
+router.get('/:id/:slug', (req, res, next) => {
+	article.getArticle(req.params.id).then((article) => {
+		req.post = article.fields;
+		req.post.article = marked(req.post.article) + disqus(req.params.id);
+		if (req.params.slug == req.post.slug) {
+			res.render('article', {
+				'article': req.post
+			});
+		} else {
+			const err = new Error("Article not found!");
+			err.status = 404;
+			next(err);
+		}
+	}).catch(error => {
+		const err = new Error(error.message);
+		err.status = 400;
+		next(err);
+	});
+});
+
+module.exports = router;

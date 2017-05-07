@@ -1,0 +1,75 @@
+doctype html
+html(lang="fr")
+
+  head
+    if ( article )
+      title #{ article.title } | cat /dev/urandom
+      - var title = article.title + " | cat /dev/urandom"
+    else
+      title Accueil | cat /dev/urandom
+      - var title = "Accueil | cat /dev/urandom"
+    if (article)
+      - var description = article.article.substring(0, 440) + "..."
+    else
+      - var description = "Le blog de Kakise, un internaute comme un autre."
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(property="og:title" content=title)
+    meta(property="og:description" content=description)
+    meta(name="description" content=description)
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(property="og:image" content="/images/avatar.jpg")
+    link(rel="stylesheet" href="/css/uikit.css")
+    link(rel="stylesheet" href="/css/site.css")
+    link(rel="stylesheet" href="/css/zenburn.css")
+    link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    script(src="/js/load.js")
+    script(src="/js/highlight.pack.js")
+    
+    script hljs.initHighlightingOnLoad();
+
+  body
+    
+    div(class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom")
+
+      div(class="uk-grid")
+      
+        div(class="uk-width-medium-3-4 uk-row-first")
+          h1(style="font-size:42px; text-align:center;")
+            a(href="/" style="color: #aaa; text-decoration: none") cat /dev/urandom
+          div(id="listing" class="block pure-u-2-3")
+            block content
+          
+        .uk-width-medium-1-4
+          div(class="uk-panel uk-panel-box uk-text-center")
+            img(class="uk-border-circle" width="120" height="120" src="/images/avatar.jpg" alt="author avatar")
+            h3 Kakise
+            p Un internaute fan de code et de tech qui essaie de vous amuser :)
+            p Vous voulez faire un don?
+            p
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="X6EFJ2DZ7QRV8">
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+              <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+              </form>
+              
+          div(class="uk-panel uk-panel-box uk-text-center")
+            h3 Le reste du site
+            p 
+              a(href="https://pod.kakise.xyz") KakiPod, diaspora*
+            p 
+              a(href="https://cloud.kakise.xyz") KakiDrive, Nextcloud
+            p 
+              a(href="https://pad.kakise.xyz") KakiPad, Etherpad
+            p 
+              a(href="https://notes.kakise.xyz") KakiNotes, Turtl
+            p 
+              a(href="https://lab.kakise.xyz") KakiLab, Gogs
+
+  footer(id="footer")
+      p Crée avec amour par 
+        a(href="https://kakise.xyz") Kakise
+        | . &lt;3
+        p Version: 1.1.0
