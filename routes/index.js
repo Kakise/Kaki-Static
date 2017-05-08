@@ -24,7 +24,7 @@ function execQuery(req, res, next) {
 		};
 		postArr = list.items;
 		postArr.forEach(article => {
-			article.toRead = Math.trunc(parseInt(toRead(article.fields).time, 10) / 60000); // Return an estimation in minutes
+			article.toRead = Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000); // Return an estimation in minutes
 		});
 		next();
 	}).catch(error => {
