@@ -36,6 +36,7 @@ function execQuery(req, res, next) {
 				hour: "numeric",
 				minute: "numeric"
 			}).format(new Date(article.fields.date));
+			article.fields.date = article.fields.date.charAt(0).toUpperCase() + article.fields.date.slice(1); // Force the first letter to be capitalized
 		});
 		next();
 	}).catch(error => {
