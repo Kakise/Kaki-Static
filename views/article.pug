@@ -7,7 +7,13 @@ block content
     each tag in article.tags
       span(class="tag") #{tag}
   br
-  p(class="uk-article-meta") Temps de lecture estimé: #{toRead} minutes
+  p(class="uk-article-meta") 
+    if (toRead < 1)
+      | Temps de lecture estimé: #{toRead} moins d'une minute
+    if (toRead = 1)
+      | Temps de lecture estimé: #{toRead} minute
+    if (toRead > 1)
+      | Temps de lecture estimé: #{toRead} minutes
   if (article.source)
     i Source: #{article.source}
   
@@ -15,6 +21,3 @@ block content
   
   h4
     a(href="/") Retour à l'accueil
-  
-  script.
-    $('body').readRemaining();

@@ -11,7 +11,12 @@ block content
           h1(class="uk-article-title" style="color: #739a99") #{article.fields.title}
           p(class="uk-article-meta") #{new Date(article.fields.date).toLocaleString(process.env.LANG)}
             br
-            | Temps de lecture estimé: #{article.toRead} minutes
+            if (article.toRead < 1)
+              | Temps de lecture estimé: #{article.toRead} Moins d'une minute
+            if (article.toRead = 1)
+              | Temps de lecture estimé: #{article.toRead} minute
+            if (article.toRead > 1)
+              | Temps de lecture estimé: #{article.toRead} minutes
           div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
           br
           a(href="/article/" + article.sys.id + "/" + article.fields.slug) Lire la suite !
