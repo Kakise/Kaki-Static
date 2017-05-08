@@ -38,6 +38,8 @@ client.getEntries({
 			});
 		});
 	});
+}).catch(error => {
+	console.log(error.message);
 });
 
 proxy.all("/*", (req, res) => {
