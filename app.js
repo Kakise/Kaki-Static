@@ -38,6 +38,11 @@ client.getEntries({
 			});
 		});
 	});
+	throng({
+		workers: WORKERS,
+		lifetime: 60000,
+		start: startFn
+	});
 }).catch(error => {
 	console.log(error.message);
 });
@@ -61,12 +66,6 @@ const app = express();
 process.env.DYNO !== "" ? app.use(enforce.HTTPS({
 	trustProtoHeader: true
 })) : app.use(enforce.HTTPS());
-
-throng({
-	workers: WORKERS,
-	lifetime: 60000,
-	start: startFn
-});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
