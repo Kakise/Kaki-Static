@@ -55,9 +55,9 @@ router.get('/', execQuery, (req, res, next) => {
 		next(err);
 	} else {
 		res.render('index', {
-			'articles': postArr,
-			'md': marked,
-			'version': require("../package.json").version,
+			articles: postArr,
+			md: marked,
+			version: require("../package.json").version,
 			pagination: {
 				id: 1,
 				max: pagination.max,
@@ -78,9 +78,9 @@ router.get('/:id', execQuery, (req, res, next) => {
 		next(err);
 	} else {
 		res.render('index', {
-			'articles': postArr,
-			'md': marked,
-			'version': require("../package.json").version,
+			articles: postArr,
+			md: marked,
+			version: require("../package.json").version,
 			pagination: {
 				id: pagination.id,
 				max: pagination.max,

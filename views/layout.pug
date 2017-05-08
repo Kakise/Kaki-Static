@@ -8,7 +8,7 @@ html(lang="fr")
     else
       title Accueil | cat /dev/urandom
       - var title = "Accueil | cat /dev/urandom"
-    if (article)
+    if (article && !preview)
       - var description = article.desc.substring(0, 440) + "..."
     else
       - var description = "Le blog de Kakise, un internaute comme un autre."

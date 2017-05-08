@@ -8,7 +8,8 @@ router.get('/:id', (req, res, next) => {
 		req.post = article.fields;
 		req.post.article = marked(req.post.article);
 		res.render('article', {
-			'article': req.post
+			article: req.post,
+			preview: 1
 		});
 
 	}).catch(error => {
