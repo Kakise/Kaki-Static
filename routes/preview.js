@@ -9,7 +9,8 @@ router.get('/:id', (req, res, next) => {
 		req.post.article = marked(req.post.article);
 		res.render('article', {
 			article: req.post,
-			preview: 1
+			preview: 1,
+			version: require("../package.json").version
 		});
 
 	}).catch(error => {
