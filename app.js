@@ -30,7 +30,7 @@ client.getEntries({
 	content_type: 'reverseProxy'
 }).then(list => {
 	list.items.forEach(prox => {
-		console.log('Added proxy: ', prox.fields.log, '=: ', prox.fields.origine, 'to: ', prox.fields.cible);
+		console.log('Added proxy: ', prox.fields.log, '=> ', prox.fields.origine, 'to: ', prox.fields.cible);
 		proxy.all(`${prox.fields.origine}/*`, (req, res) => {
 			console.log(`Bridge to ${prox.fields.log}`);
 			apiProxy.web(req, res, {
