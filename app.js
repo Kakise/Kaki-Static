@@ -38,6 +38,12 @@ client.getEntries({
 			});
 		});
 	});
+	proxy.all("/*", (req, res) => {
+		console.log('Bridge to server');
+		apiProxy.web(req, res, {
+			target: `http://localhost:${port}`
+		});
+	});
 	throng({
 		workers: WORKERS,
 		lifetime: 60000,
@@ -45,13 +51,6 @@ client.getEntries({
 	});
 }).catch(error => {
 	console.log(error.message);
-});
-
-proxy.all("/*", (req, res) => {
-	console.log('Bridge to server');
-	apiProxy.web(req, res, {
-		target: `http://localhost:${port}`
-	});
 });
 
 proxy.on('error', (err, req, res) => {
