@@ -25,7 +25,7 @@ const httpProxy = require('http-proxy');
 const apiProxy = httpProxy.createProxyServer();
 const proxy = express();
 
-// Dynamic proxying using Contentful
+// TODO: Dynamic proxying using Contentful
 client.getEntries({
 	content_type: 'reverseProxy'
 }).then((list) => {

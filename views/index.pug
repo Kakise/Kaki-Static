@@ -9,7 +9,14 @@ block content
       each article in articles
         div(class="list-blog-header")
           h1(class="uk-article-title" style="color: #739a99") #{article.fields.title}
-          p(class="uk-article-meta") #{article.fields.date}
+          p(class="uk-article-meta") #{new Date(article.fields.date).toLocaleString(process.env.LANG)}
+            br
+            if (article.toRead < 1)
+              | Temps de lecture estimé: Moins d'une minute
+            if (article.toRead === 1)
+              | Temps de lecture estimé: Une minute
+            if (article.toRead > 1)
+              | Temps de lecture estimé: #{article.toRead} minutes
           div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
           br
           a(href="/article/" + article.sys.id + "/" + article.fields.slug) Lire la suite !
