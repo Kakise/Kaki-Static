@@ -9,7 +9,7 @@ html(lang="fr")
       title Accueil | cat /dev/urandom
       - var title = "Accueil | cat /dev/urandom"
     if (article)
-      - var description = article.article.substring(0, 440) + "..."
+      - var description = article.desc.substring(0, 440) + "..."
     else
       - var description = "Le blog de Kakise, un internaute comme un autre."
     meta(charset="utf-8")

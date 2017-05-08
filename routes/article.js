@@ -3,6 +3,8 @@ const router = express.Router();
 const article = require('../services/article.js');
 const toRead = require('reading-time');
 const marked = require('marked');
+const PlainTextRenderer = require('marked-plaintext');
+const renderer = new PlainTextRenderer();
 
 function disqus(id) {
 	if (typeof process.env.disqus !== "undefined")
@@ -26,6 +28,9 @@ router.get('/:id/:slug', (req, res, next) => {
 	article.getArticle(req.params.id).then((article) => {
 		req.post = article.fields;
 		req.post.article = marked(req.post.article) + disqus(req.params.id);
+		req.post.desc = marked(req.post.article, {
+			renderer: renderer
+		});
 		if (req.params.slug == req.post.slug) {
 			res.render('article', {
 				'article': req.post,
