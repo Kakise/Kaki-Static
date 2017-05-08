@@ -3,6 +3,8 @@ const router = express.Router();
 const index = require('../services/index.js');
 const marked = require('marked');
 const toRead = require('reading-time');
+const i18n = require('intl');
+Intl.DateTimeFormat = i18n.DateTimeFormat;
 let pagination = {};
 let postArr = [];
 let id;
@@ -26,6 +28,14 @@ function execQuery(req, res, next) {
 		postArr = list.items;
 		postArr.forEach(article => {
 			article.toRead = Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000); // Return an estimation in minutes
+			article.fields.date = new Intl.DateTimeFormat(process.env.LANG, {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				hour: "numeric",
+				minute: "numeric"
+			}).format(new Date(article.fields.date));
 		});
 		next();
 	}).catch(error => {
@@ -46,14 +56,6 @@ router.get('/', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
-			'intl': require('intl')(process.env.LANG, {
-				weekday: "long",
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-				hour: "numeric",
-				minute: "numeric"
-			}),
 			pagination: {
 				id: 1,
 				max: pagination.max,
@@ -76,14 +78,6 @@ router.get('/:id', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
-			'intl': require('intl')(process.env.LANG, {
-				weekday: "long",
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-				hour: "numeric",
-				minute: "numeric"
-			}),
 			pagination: {
 				id: pagination.id,
 				max: pagination.max,
