@@ -10,7 +10,7 @@ block content
   p(class="uk-article-meta") 
     if (toRead < 1)
       | Temps de lecture estimé: #{toRead} moins d'une minute
-    if (toRead = 1)
+    if (toRead === 1)
       | Temps de lecture estimé: #{toRead} minute
     if (toRead > 1)
       | Temps de lecture estimé: #{toRead} minutes

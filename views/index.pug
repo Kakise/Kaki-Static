@@ -12,9 +12,9 @@ block content
           p(class="uk-article-meta") #{new Date(article.fields.date).toLocaleString(process.env.LANG)}
             br
             if (article.toRead < 1)
-              | Temps de lecture estimé: #{article.toRead} Moins d'une minute
-            if (article.toRead = 1)
-              | Temps de lecture estimé: #{article.toRead} minute
+              | Temps de lecture estimé: Moins d'une minute
+            if (article.toRead === 1)
+              | Temps de lecture estimé: Une minute
             if (article.toRead > 1)
               | Temps de lecture estimé: #{article.toRead} minutes
           div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
