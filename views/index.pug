@@ -9,7 +9,7 @@ block content
       each article in articles
         div(class="list-blog-header")
           h1(class="uk-article-title" style="color: #739a99") #{article.fields.title}
-          p(class="uk-article-meta") #{new Date(article.fields.date).toLocaleString(process.env.LANG, {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric"})}
+          p(class="uk-article-meta") #{intl(new Date(article.fields.date))}
             br
             if (article.toRead < 1)
               | Temps de lecture estimé: Moins d'une minute

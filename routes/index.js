@@ -46,6 +46,14 @@ router.get('/', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
+			'intl': require('intl')(process.env.LANG, {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				hour: "numeric",
+				minute: "numeric"
+			}),
 			pagination: {
 				id: 1,
 				max: pagination.max,
@@ -68,6 +76,14 @@ router.get('/:id', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
+			'intl': require('intl')(process.env.LANG, {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				hour: "numeric",
+				minute: "numeric"
+			}),
 			pagination: {
 				id: pagination.id,
 				max: pagination.max,
