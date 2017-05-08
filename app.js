@@ -104,7 +104,7 @@ if (process.env.NODE_ENV === 'development') {
 		res.render('error', {
 			message: err.message,
 			error: err,
-			version: require("../package.json").version
+			version: require("./package.json").version
 
 		});
 	});
@@ -119,7 +119,7 @@ if (process.env.NODE_ENV === 'production') {
 		res.render('error', {
 			message: err.message,
 			error: {},
-			version: require("../package.json").version
+			version: require("./package.json").version
 		});
 	});
 }
