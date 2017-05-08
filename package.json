@@ -1,42 +1,43 @@
 {
-  "name": "kakistatic",
-  "version": "1.1.0",
-  "description": "Blog engine made in node.js using contentful and heroku.",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kakise/Kaki-Static.git"
-  },
-  "author": "Kakise",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/Kakise/Kaki-Static/issues"
-  },
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "colors": "^1.1.2",
-    "compression": "^1.6.2",
-    "contentful": "^3.6.4",
-    "cookie-parser": "~1.4.3",
-    "express": "^4.15.2",
-    "express-minify": "^0.2.0",
-    "express-sslify": "^1.2.0",
-    "express-subdomain": "^1.0.5",
-    "helmet": "^3.5.0",
-    "http-proxy": "^1.16.2",
-    "ipware": "^1.0.0",
-    "jsonwebtoken": "^7.3.0",
-    "marked": "^0.3.6",
-    "mongodb": "^2.2.11",
-    "morgan": "^1.8.1",
-    "pug": "2.0.0-alpha6",
-    "reading-time": "^1.1.0",
-    "rss": "^1.2.1",
-    "serve-favicon": "^2.4.2",
-    "throng": "^4.0.0"
-  },
-  "homepage": "https://github.com/Kakise/Kaki-Static#readme"
+	"name": "kakistatic",
+	"version": "1.1.0",
+	"description": "Blog engine made in node.js using contentful and heroku.",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Kakise/Kaki-Static.git"
+	},
+	"author": "Kakise",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/Kakise/Kaki-Static/issues"
+	},
+	"dependencies": {
+		"body-parser": "^1.15.2",
+		"colors": "^1.1.2",
+		"compression": "^1.6.2",
+		"contentful": "^3.6.4",
+		"cookie-parser": "~1.4.3",
+		"express": "^4.15.2",
+		"express-minify": "^0.2.0",
+		"express-sslify": "^1.2.0",
+		"express-subdomain": "^1.0.5",
+		"helmet": "^3.6.0",
+		"http-proxy": "^1.16.2",
+		"ipware": "^1.0.0",
+		"jsonwebtoken": "^7.3.0",
+		"marked": "^0.3.6",
+		"mongodb": "^2.2.11",
+		"morgan": "^1.8.1",
+		"pug": "2.0.0-rc.1",
+		"reading-time": "^1.1.0",
+		"rss": "^1.2.1",
+		"serve-favicon": "^2.4.2",
+		"throng": "^4.0.0",
+		"intl": "^1.2.5"
+	},
+	"homepage": "https://github.com/Kakise/Kaki-Static#readme"
 }

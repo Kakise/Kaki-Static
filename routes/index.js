@@ -7,6 +7,7 @@ let pagination = {};
 let postArr = [];
 let id;
 
+// Middleware
 function execQuery(req, res, next) {
 	typeof req.params.id !== 'string' ? id = 1 : id = parseInt(req.params.id, 10);
 

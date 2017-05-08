@@ -30,6 +30,10 @@
 		"NODE_ENV": {
 			"description": "Can be 'production' or 'developement'",
 			"value": "production"
+		},
+		"LANG": {
+			"description": "Locale",
+			"value": "en-US"
 		}
 	},
 	"formation": {},
