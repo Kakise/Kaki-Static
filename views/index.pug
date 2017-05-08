@@ -10,6 +10,7 @@ block content
         div(class="list-blog-header")
           h1(class="uk-article-title" style="color: #739a99") #{article.fields.title}
           p(class="uk-article-meta") #{article.fields.date}
+          p(class="uk-article-meta") #{article.toRead}
           div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
           br
           a(href="/article/" + article.sys.id + "/" + article.fields.slug) Lire la suite !

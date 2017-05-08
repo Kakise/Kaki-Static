@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const index = require('../services/index.js');
 const marked = require('marked');
+const toRead = require('reading-time');
 let pagination = {};
 let postArr = [];
 let id;
 
 function execQuery(req, res, next) {
-	typeof req.params.id !== 'string' ? id = 1 : id = parseInt(req.params.id);
+	typeof req.params.id !== 'string' ? id = 1 : id = parseInt(req.params.id, 10);
 
 	// Get the article list
 	index.listArticles({
@@ -22,6 +23,9 @@ function execQuery(req, res, next) {
 			max: Math.trunc(list.total / 5) + 1
 		};
 		postArr = list.items;
+		postArr.forEach(article => {
+			article.toRead = Math.trunc(parseInt(toRead(article.fields).time, 10) / 60000); // Return an estimation in minutes
+		});
 		next();
 	}).catch(error => {
 		const err = new Error(error.message);

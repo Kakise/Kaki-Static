@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const article = require('../services/article.js');
+const toRead = require('reading-time');
 const marked = require('marked');
 
 function disqus(id) {
-	return `
+	if (typeof process.env.disqus !== "undefined")
+		return `
     <div id="disqus_thread"></div>
     <script>
     	var disqus_config = function () {
@@ -26,7 +28,8 @@ router.get('/:id/:slug', (req, res, next) => {
 		req.post.article = marked(req.post.article) + disqus(req.params.id);
 		if (req.params.slug == req.post.slug) {
 			res.render('article', {
-				'article': req.post
+				'article': req.post,
+				'toRead': Math.trunc(parseInt(toRead(article.fields).time, 10) / 60000) // Return an estimation in minutes
 			});
 		} else {
 			const err = new Error("Article not found!");

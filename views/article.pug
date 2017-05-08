@@ -7,6 +7,7 @@ block content
     each tag in article.tags
       span(class="tag") #{tag}
   br
+  p(class="uk-article-meta") #{toRead}
   if (article.source)
     i Source: #{article.source}
   
@@ -14,3 +15,6 @@ block content
   
   h4
     a(href="/") Retour à l'accueil
+  
+  script
+    $('body').readRemaining();
