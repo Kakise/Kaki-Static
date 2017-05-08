@@ -1,8 +1,11 @@
 {
 	"name": "kakistatic",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Blog engine made in node.js using contentful and heroku.",
 	"main": "app.js",
+	"engines": {
+		"node": "7.10.0"
+	},
 	"scripts": {
 		"start": "node app.js"
 	},
@@ -17,7 +20,6 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.15.2",
-		"colors": "^1.1.2",
 		"compression": "^1.6.2",
 		"contentful": "^3.6.4",
 		"cookie-parser": "~1.4.3",
@@ -27,11 +29,9 @@
 		"express-subdomain": "^1.0.5",
 		"helmet": "^3.6.0",
 		"http-proxy": "^1.16.2",
-		"ipware": "^1.0.0",
 		"jsonwebtoken": "^7.3.0",
 		"marked": "^0.3.6",
 		"marked-plaintext": "^0.0.2",
-		"mongodb": "^2.2.11",
 		"morgan": "^1.8.1",
 		"pug": "2.0.0-rc.1",
 		"reading-time": "^1.1.0",

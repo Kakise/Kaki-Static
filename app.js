@@ -103,7 +103,9 @@ if (process.env.NODE_ENV === 'development') {
 		res.status(err.status || 500);
 		res.render('error', {
 			message: err.message,
-			error: err
+			error: err,
+			version: require("./package.json").version
+
 		});
 	});
 }
@@ -116,7 +118,8 @@ if (process.env.NODE_ENV === 'production') {
 		res.status(err.status || 500);
 		res.render('error', {
 			message: err.message,
-			error: {}
+			error: {},
+			version: require("./package.json").version
 		});
 	});
 }

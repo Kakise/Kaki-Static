@@ -3,6 +3,8 @@ const router = express.Router();
 const index = require('../services/index.js');
 const marked = require('marked');
 const toRead = require('reading-time');
+const i18n = require('intl');
+Intl.DateTimeFormat = i18n.DateTimeFormat;
 let pagination = {};
 let postArr = [];
 let id;
@@ -26,6 +28,15 @@ function execQuery(req, res, next) {
 		postArr = list.items;
 		postArr.forEach(article => {
 			article.toRead = Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000); // Return an estimation in minutes
+			article.fields.date = new Intl.DateTimeFormat(process.env.LANG, {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				hour: "numeric",
+				minute: "numeric"
+			}).format(new Date(article.fields.date));
+			article.fields.date = article.fields.date.charAt(0).toUpperCase() + article.fields.date.slice(1); // Force the first letter to be capitalized
 		});
 		next();
 	}).catch(error => {
@@ -46,6 +57,7 @@ router.get('/', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
+			'version': require("../package.json").version,
 			pagination: {
 				id: 1,
 				max: pagination.max,
@@ -68,6 +80,7 @@ router.get('/:id', execQuery, (req, res, next) => {
 		res.render('index', {
 			'articles': postArr,
 			'md': marked,
+			'version': require("../package.json").version,
 			pagination: {
 				id: pagination.id,
 				max: pagination.max,
