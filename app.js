@@ -22,7 +22,7 @@ const WORKERS = process.env.WORKERS || 1;
 // Proxy Server
 const httpProxy = require('http-proxy');
 
-const apiProxy = httpProxy.createProxyServer();
+const apiProxy = httpProxy.createProxyServer({changeOrigin: true});
 const proxy = express();
 
 // TODO: Dynamic proxying using Contentful
