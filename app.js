@@ -34,7 +34,7 @@ client.getEntries({
 		proxy.all(`${prox.fields.origine}/*`, (req, res) => {
 			console.log(`Bridge to ${prox.fields.log}`);
 			apiProxy.web(req, res, {
-				target: `http://${prox.fields.cible}`
+				target: prox.fields.cible
 			});
 		});
 	});
