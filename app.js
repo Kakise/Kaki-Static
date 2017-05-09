@@ -22,29 +22,35 @@ const WORKERS = process.env.WORKERS || 1;
 // Proxy Server
 const httpProxy = require('http-proxy');
 
-const apiProxy = httpProxy.createProxyServer();
+const apiProxy = httpProxy.createProxyServer({changeOrigin: true});
 const proxy = express();
 
 // TODO: Dynamic proxying using Contentful
 client.getEntries({
 	content_type: 'reverseProxy'
-}).then((list) => {
-	list.items.forEach((prox) => {
-		console.log('Added proxy: ', prox.fields.log, '=: ', proxy.fields.origine, 'to: ', proxy.fields.cible);
+}).then(list => {
+	list.items.forEach(prox => {
+		console.log('Added proxy: ', prox.fields.log, '=> ', prox.fields.origine, 'to: ', prox.fields.cible);
 		proxy.all(`${prox.fields.origine}/*`, (req, res) => {
 			console.log(`Bridge to ${prox.fields.log}`);
 			apiProxy.web(req, res, {
-				target: `http://${prox.fields.cible}`
+				target: prox.fields.cible
 			});
 		});
 	});
-});
-
-proxy.all("/*", (req, res) => {
-	console.log('Bridge to server');
-	apiProxy.web(req, res, {
-		target: `http://localhost:${port}`
+	proxy.all("/*", (req, res) => {
+		console.log('Bridge to server');
+		apiProxy.web(req, res, {
+			target: `http://localhost:${port}`
+		});
 	});
+	throng({
+		workers: WORKERS,
+		lifetime: 60000,
+		start: startFn
+	});
+}).catch(error => {
+	console.log(error.message);
 });
 
 proxy.on('error', (err, req, res) => {
@@ -59,12 +65,6 @@ const app = express();
 process.env.DYNO !== "" ? app.use(enforce.HTTPS({
 	trustProtoHeader: true
 })) : app.use(enforce.HTTPS());
-
-throng({
-	workers: WORKERS,
-	lifetime: 60000,
-	start: startFn
-});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
