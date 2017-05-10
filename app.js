@@ -14,6 +14,7 @@ const enforce = require('express-sslify');
 const client = require('./services/contentfulClient.js').client;
 const throng = require('throng');
 const nginx = require('./config/nginx.conf.js');
+const fs = require('fs');
 
 // Useful vars
 const port = 3000;
