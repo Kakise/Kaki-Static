@@ -31,6 +31,12 @@ client.getEntries({
 }).then(list => {
 	list.items.forEach(prox => {
 		console.log('Added proxy: ', prox.fields.log, '=> ', prox.fields.origine, 'to: ', prox.fields.cible);
+		proxy.all(prox.fields.origine, (req, res) => {
+			console.log(`Bridge to ${prox.fields.log}`);
+			apiProxy.web(req, res, {
+				target: prox.fields.cible
+			});
+		});		
 		proxy.all(`${prox.fields.origine}/*`, (req, res) => {
 			console.log(`Bridge to ${prox.fields.log}`);
 			apiProxy.web(req, res, {
@@ -38,6 +44,7 @@ client.getEntries({
 			});
 		});
 	});
+	// Proxy to the webserver
 	proxy.all("/*", (req, res) => {
 		console.log('Bridge to server');
 		apiProxy.web(req, res, {
@@ -53,6 +60,7 @@ client.getEntries({
 	console.log(error.message);
 });
 
+// Avoids web server crash
 proxy.on('error', (err, req, res) => {
 	res.writeHead(500, {
 		'Content-Type': 'text/plain'
