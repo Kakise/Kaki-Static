@@ -40,7 +40,7 @@
 	"addons": [
 
 	],
-	"stack": "heroku-16",
+	"stack": "cedar-14",
 	"repository": "https://github.com/Kakise/Kaki-Static",
 	"buildpacks": [{
 		"url": "heroku/nodejs"
