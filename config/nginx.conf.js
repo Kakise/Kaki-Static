@@ -39,7 +39,7 @@ http {
     root   /app/public;
     #index  index.html index.htm;
 
-		location = / {
+		location / {
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
@@ -47,13 +47,11 @@ http {
 		}
 		${array.forEach(prox =>{
 		return `
-		location $ {
-			prox.fields.origine
-		} {
-			proxy_set_header X - Forwarded - For $proxy_add_x_forwarded_for;
+		location ${prox.fields.origine} {
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
-			proxy_pass http: //prox.fields.cible;
+			proxy_pass http://${prox.fields.cible};
 		}
 		`;	
 		})}
