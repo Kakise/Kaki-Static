@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
@@ -14,65 +13,32 @@ const minify = require('express-minify');
 const enforce = require('express-sslify');
 const client = require('./services/contentfulClient.js').client;
 const throng = require('throng');
+const nginx = require('./config/nginx.conf.js');
 
 // Useful vars
-const port = (parseInt(process.env.PORT) + 1).toString();
+const port = 3000;
 const WORKERS = process.env.WORKERS || 1;
 
-// Proxy Server
-const httpProxy = require('http-proxy');
-
-const apiProxy = httpProxy.createProxyServer({changeOrigin: true});
-const proxy = express();
-
-// TODO: Dynamic proxying using Contentful
+// Creates the nginx config
 client.getEntries({
 	content_type: 'reverseProxy'
 }).then(list => {
-	list.items.forEach(prox => {
-		console.log('Added proxy: ', prox.fields.log, '=> ', prox.fields.origine, 'to: ', prox.fields.cible);
-		proxy.all(prox.fields.origine, (req, res) => {
-			console.log(`Bridge to ${prox.fields.log}`);
-			apiProxy.web(req, res, {
-				target: prox.fields.cible
-			});
-		});		
-		proxy.all(`${prox.fields.origine}/*`, (req, res) => {
-			console.log(`Bridge to ${prox.fields.log}`);
-			apiProxy.web(req, res, {
-				target: prox.fields.cible
-			});
-		});
-	});
-	// Proxy to the webserver
-	proxy.all("/*", (req, res) => {
-		console.log('Bridge to server');
-		apiProxy.web(req, res, {
-			target: `http://localhost:${port}`
-		});
-	});
+	nginx.createConfigFile(list.items); // Sync func
 	throng({
 		workers: WORKERS,
 		lifetime: 60000,
 		start: startFn
 	});
+	fs.openSync('/tmp/app-initialized', 'w');
 }).catch(error => {
 	console.log(error.message);
 });
 
-// Avoids web server crash
-proxy.on('error', (err, req, res) => {
-	res.writeHead(500, {
-		'Content-Type': 'text/plain'
-	});
-	res.end(`An error happened while proxying: ${err}`);
-});
-
 const app = express();
 
-process.env.DYNO !== "" ? app.use(enforce.HTTPS({
+app.use(enforce.HTTPS({
 	trustProtoHeader: true
-})) : app.use(enforce.HTTPS());
+}));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

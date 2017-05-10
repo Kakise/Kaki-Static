@@ -1,6 +1,6 @@
 {
 	"name": "kakistatic",
-	"version": "1.2.0",
+	"version": "2.0.0",
 	"description": "Blog engine made in node.js using contentful and heroku.",
 	"main": "app.js",
 	"engines": {
@@ -22,13 +22,11 @@
 		"body-parser": "^1.15.2",
 		"compression": "^1.6.2",
 		"contentful": "^3.6.4",
-		"cookie-parser": "~1.4.3",
 		"express": "^4.15.2",
 		"express-minify": "^0.2.0",
 		"express-sslify": "^1.2.0",
 		"express-subdomain": "^1.0.5",
 		"helmet": "^3.6.0",
-		"http-proxy": "^1.16.2",
 		"jsonwebtoken": "^7.3.0",
 		"marked": "^0.3.6",
 		"marked-plaintext": "^0.0.2",

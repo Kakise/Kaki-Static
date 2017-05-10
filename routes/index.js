@@ -27,7 +27,7 @@ function execQuery(req, res, next) {
 		};
 		postArr = list.items;
 		postArr.forEach(article => {
-			article.toRead = Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000); // Return an estimation in minutes
+			article.toRead = Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) + 1; // Return an estimation in minutes
 			article.fields.date = new Intl.DateTimeFormat(process.env.LANG, {
 				weekday: "long",
 				year: "numeric",

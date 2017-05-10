@@ -44,5 +44,7 @@
 	"repository": "https://github.com/Kakise/Kaki-Static",
 	"buildpacks": [{
 		"url": "heroku/nodejs"
+	}, {
+		"url": "https://github.com/ryandotsmith/nginx-buildpack.git"
 	}]
 }
