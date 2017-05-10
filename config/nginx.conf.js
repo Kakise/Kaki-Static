@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function createConfigFile(array) {
-	fs.writeFileSync(path.join(__dirname, "config/nginx.conf.erb"), `
+	fs.writeFileSync(path.join(__dirname, "nginx.conf.erb"), `
 daemon off;
 #Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
