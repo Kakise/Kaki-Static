@@ -45,6 +45,6 @@
 	"buildpacks": [{
 		"url": "heroku/nodejs"
 	}, {
-		"url": "https://github.com/ryandotsmith/nginx-buildpack.git"
+		"url": "https://github.com/Kakise/nginx-buildpack.git"
 	}]
 }
