@@ -2,7 +2,16 @@ const fs = require('fs');
 const path = require('path');
 
 function createConfigFile(array) {
-	fs.writeFileSync("nginx.conf.erb", `
+var proxyconf;
+		array.forEach(prox =>{
+		proxyconf += `
+		location ${prox.fields.origine} {
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header Host $http_host;
+			proxy_redirect off;
+			proxy_pass http://${prox.fields.cible};
+		}`;
+	fs.writeFileSync("/app/config/nginx.conf.erb", `
 daemon off;
 #Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
@@ -44,16 +53,7 @@ http {
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-		}
-		${array.forEach(prox =>{
-		return `
-		location ${prox.fields.origine} {
-			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-			proxy_set_header Host $http_host;
-			proxy_redirect off;
-			proxy_pass http://${prox.fields.cible};
-		}
-		`;	
+		}` + proxyconf + `	
 		})}
 	}
 }
