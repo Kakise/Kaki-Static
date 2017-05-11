@@ -101,9 +101,6 @@ function startFn(id) {
 	app.listen(port, () => {
 		console.log('[SERVER] Worker: ', id, ' started');
 	});
-	proxy.listen(process.env.PORT, () => {
-		console.log('[PROXY] Worker: ', id, ' started');
-	});
 }
 
 module.exports = app;
