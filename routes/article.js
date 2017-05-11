@@ -34,7 +34,7 @@ router.get('/:id/:slug', (req, res, next) => {
 		if (req.params.slug == req.post.slug) {
 			res.render('article', {
 				article: req.post,
-				toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000), // Return an estimation in minutes
+				toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
 				version: require("../package.json").version
 			});
 		} else {
