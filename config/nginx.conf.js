@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 function createConfigFile(array) {
-var proxyconf;
-		array.forEach(prox =>{
+var proxyconf = "";
+		array.forEach(prox => {
 		proxyconf += `
 		location ${prox.fields.origine} {
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
