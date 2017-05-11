@@ -10,7 +10,7 @@ var proxyconf;
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://${prox.fields.cible};
-		}`;
+		}`});
 	fs.writeFileSync("/app/config/nginx.conf.erb", `
 daemon off;
 #Heroku dynos have at least 4 cores.
@@ -54,7 +54,7 @@ http {
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
 		}` + proxyconf + `	
-		})}
+		
 	}
 }
 	`);
