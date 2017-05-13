@@ -19,7 +19,7 @@ block content
               | Temps de lecture estimé: #{article.toRead} minutes
           div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
           br
-          a(href="/article/" + article.sys.id + "/" + article.fields.slug) Lire la suite !
+          a(href="/article/" + article.fields.slug) Lire la suite !
           hr
     else
       div(class="list-blog-header")
