@@ -24,8 +24,10 @@ function disqus(id) {
 	    </script>`;
 }
 
-router.get('/:id/:slug', (req, res, next) => {
-	article.getArticle(req.params.id).then((article) => {
+router.get('/:slug', (req, res, next) => {
+	article.getArticle({  
+		content_type: 'blogPost',
+  		'fields.slug[match]': req.params.slug}).then((article) => {
 		req.post = article.fields;
 		req.post.article = marked(req.post.article) + disqus(req.params.id);
 		req.post.desc = marked(req.post.article, {
