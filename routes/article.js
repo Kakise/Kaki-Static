@@ -26,7 +26,7 @@ function disqus(id) {
 
 router.get('/:id/:slug', (req, res, next) => {
 	article.getArticle(req.params.id).then((article) => {
-		req.post = article.fields;
+		req.post = article.fields[0];
 		req.post.article = marked(req.post.article) + disqus(req.params.id);
 		req.post.desc = marked(req.post.article, {
 			renderer: renderer
