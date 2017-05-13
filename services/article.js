@@ -1,7 +1,8 @@
 const client = require('./contentfulClient.js').client;
 
-function getArticle(id) {
-	return client.getEntry(id);
+function getArticle(query) {
+	query = query || {};
+	return client.getEntries(query);
 }
 
 module.exports = {
