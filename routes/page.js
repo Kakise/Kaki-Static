@@ -4,7 +4,7 @@ const page = require('../services/page.js');
 const marked = require('marked');
 
 router.get('/:slug', (req, res, next) => {
-	article.getPage(req.params.slug).then((page) => {
+	page.getPage(req.params.slug).then((page) => {
 		req.post = page.items[0].fields;
 		req.post.content = marked(req.post.content);
 		res.render('page', {
