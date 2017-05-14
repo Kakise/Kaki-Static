@@ -3,8 +3,14 @@ html(lang="fr")
 
   head
     if (article)
-      title #{ article.title } | cat /dev/urandom
+      title #{article.title} | cat /dev/urandom
       - var title = article.title + " | cat /dev/urandom"
+    else if (page)
+      title #{page.title} | cat /dev/urandom
+      - var title = page.title + " | cat /dev/urandom"
+    else if (tag)
+      title Recherche par tag: #{tag} | cat /dev/urandom
+      - var title = "Recherche par tag: " + tag + " | cat /dev/urandom"
     else
       title Accueil | cat /dev/urandom
       - var title = "Accueil | cat /dev/urandom"
@@ -28,7 +34,7 @@ html(lang="fr")
     script(src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js")
     script(src="/js/cookies.js")
     script(src="/js/highlight.pack.js")
-    // Code
+    // Code blocks
     script hljs.initHighlightingOnLoad();
 
   body

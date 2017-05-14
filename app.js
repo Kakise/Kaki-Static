@@ -8,6 +8,7 @@ const favicon = require('serve-favicon');
 const index = require('./routes/index.js');
 const article = require('./routes/article.js');
 const page = require('./routes/page.js');
+const tags = require('./routes/tags.js');
 const preview = require('./routes/preview.js');
 const minify = require('express-minify');
 const enforce = require('express-sslify');
@@ -20,18 +21,26 @@ const port = 3000;
 const WORKERS = process.env.WORKERS || 1;
 
 // Creates the nginx config
-client.getEntries({
-	content_type: 'reverseProxy'
-}).then(list => {
-	nginx.createConfigFile(list.items); // Sync func
+if (!process.env.TRAVIS) {
+	client.getEntries({
+		content_type: 'reverseProxy'
+	}).then(list => {
+		nginx.createConfigFile(list.items); // Sync func
+		throng({
+			workers: WORKERS,
+			lifetime: 60000,
+			start: startFn
+		});
+	}).catch(error => {
+		console.log(error.message);
+	});
+} else {
 	throng({
 		workers: WORKERS,
 		lifetime: 60000,
 		start: startFn
-	});
-}).catch(error => {
-	console.log(error.message);
-});
+	})
+}
 
 const app = express();
 
@@ -56,6 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/article', article);
 app.use('/page', page);
+app.use('/tag', tags);
 app.use('/preview', preview);
 
 // catch 404 and forward to error handler

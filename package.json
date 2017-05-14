@@ -7,7 +7,8 @@
 		"node": "7.10.0"
 	},
 	"scripts": {
-		"start": "node app.js"
+		"start": "node app.js",
+		"test": "./node_modules/.bin/tap test/*.js --100"
 	},
 	"repository": {
 		"type": "git",
@@ -37,6 +38,10 @@
 		"serve-favicon": "^2.4.2",
 		"throng": "^4.0.0",
 		"intl": "^1.2.5"
+	},
+	"devDependencies": {
+		"tap": "^10.3.2",
+		"supertest": "^3.0.0"
 	},
 	"homepage": "https://github.com/Kakise/Kaki-Static#readme"
 }

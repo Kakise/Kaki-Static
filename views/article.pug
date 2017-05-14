@@ -5,7 +5,7 @@ block content
   
   div Tags: &nbsp;
     each tag in article.tags
-      span(class="tag") #{tag}
+      a(class="tag" href="/tag/" + tag) #{tag}
   br
   p(class="uk-article-meta") 
     if (toRead < 1)

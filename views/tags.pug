@@ -1,0 +1,26 @@
+extends layout.pug
+
+block content
+  p(class="lead")
+  
+   article(class="uk-article")
+   
+    if articles.length != 0
+      each article in articles
+        div(class="list-blog-header")
+          h1(class="uk-article-title" style="color: #739a99") #{article.fields.title}
+          p(class="uk-article-meta") #{article.fields.date}
+            br
+            if (article.toRead < 1)
+              | Temps de lecture estimé: Moins d'une minute
+            if (article.toRead === 1)
+              | Temps de lecture estimé: Une minute
+            if (article.toRead > 1)
+              | Temps de lecture estimé: #{article.toRead} minutes
+          div(class="list-blog-padding")!= md(article.fields.article.substring(0, 255) + "...") 
+          br
+          a(href="/article/" + article.fields.slug) Lire la suite !
+          hr
+    else
+      div(class="list-blog-header")
+               h1(class="uk-article-title" style="color: #739a99; text-align: center") Aucun article !
