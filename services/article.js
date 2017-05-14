@@ -1,7 +1,10 @@
 const client = require('./contentfulClient.js').client;
 
-function getArticle(query) {
-	query = query || {};
+function getArticle(slug) {
+	const query = {  
+		content_type: 'blogPost',
+  		'fields.slug': slug
+	};
 	return client.getEntries(query);
 }
 
