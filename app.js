@@ -16,7 +16,7 @@ const throng = require('throng');
 const nginx = require('./config/nginx.conf.js');
 
 // Useful vars
-const port = process.env.PORT;
+const port = 3000;
 const WORKERS = process.env.WORKERS || 1;
 
 // Creates the nginx config
