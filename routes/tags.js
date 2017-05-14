@@ -35,10 +35,11 @@ function execQuery(req, res, next) {
 
 router.get('/:tag', execQuery, (req, res, next) => {
 	// Error handler
-	res.render('index', {
+	res.render('tags', {
 		articles: postArr,
 		md: marked,
-		version: require("../package.json").version
+		version: require("../package.json").version,
+		tag: req.params.tag
 	});
 });
 

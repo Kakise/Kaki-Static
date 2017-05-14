@@ -3,8 +3,14 @@ html(lang="fr")
 
   head
     if (article)
-      title #{ article.title } | cat /dev/urandom
+      title #{article.title} | cat /dev/urandom
       - var title = article.title + " | cat /dev/urandom"
+    else if (page)
+      title #{page.title} | cat /dev/urandom
+      - var title = article.title + " | cat /dev/urandom"
+    else if (tag)
+      title Recherche par tag: #{tag} | cat /dev/urandom
+      - var title = "Recherche par tag: " + tag + " | cat /dev/urandom"
     else
       title Accueil | cat /dev/urandom
       - var title = "Accueil | cat /dev/urandom"
