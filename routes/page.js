@@ -12,7 +12,6 @@ router.get('/:slug', (req, res, next) => {
 			version: require("../package.json").version
 		});
 	}).catch(error => {
-		console.log(err);
 		var err = new Error(error.message);
 		err.status = 400;
 		next(err);
