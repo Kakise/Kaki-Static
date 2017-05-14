@@ -8,7 +8,7 @@
 	},
 	"scripts": {
 		"start": "node app.js",
-		"test": "tap test/*.js --100"
+		"test": "./node_modules/.bin/tap test/*.js --100"
 	},
 	"repository": {
 		"type": "git",
