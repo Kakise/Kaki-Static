@@ -1,5 +1,5 @@
 # Kaki-Static
-[![Code Climate](https://codeclimate.com/github/Kakise/Kaki-Static.png)](https://codeclimate.com/github/Kakise/Kaki-Static)  
+[![Code Climate](https://codeclimate.com/github/Kakise/Kaki-Static.png)](https://codeclimate.com/github/Kakise/Kaki-Static) [![Build Status](https://travis-ci.org/Kakise/Kaki-Static.svg?branch=master)](https://travis-ci.org/Kakise/Kaki-Static)  
 More than a blog engine, it's a full featured web server.
 
 This engine is given for free but I will appreciate any donations.

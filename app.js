@@ -21,18 +21,26 @@ const port = 3000;
 const WORKERS = process.env.WORKERS || 1;
 
 // Creates the nginx config
-client.getEntries({
-	content_type: 'reverseProxy'
-}).then(list => {
-	nginx.createConfigFile(list.items); // Sync func
+if (!process.env.TRAVIS) {
+	client.getEntries({
+		content_type: 'reverseProxy'
+	}).then(list => {
+		nginx.createConfigFile(list.items); // Sync func
+		throng({
+			workers: WORKERS,
+			lifetime: 60000,
+			start: startFn
+		});
+	}).catch(error => {
+		console.log(error.message);
+	});
+} else {
 	throng({
 		workers: WORKERS,
 		lifetime: 60000,
 		start: startFn
-	});
-}).catch(error => {
-	console.log(error.message);
-});
+	})
+}
 
 const app = express();
 
