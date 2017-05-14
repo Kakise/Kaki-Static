@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const article = require('../services/article.js');
 const toRead = require('reading-time');
-const marked = require('marked');
-const PlainTextRenderer = require('marked-plaintext');
-const renderer = new PlainTextRenderer();
+const removeMd = require('remove-markdown');
 
 function disqus(id) {
 	if (typeof process.env.disqus !== "undefined")
@@ -25,15 +23,10 @@ function disqus(id) {
 }
 
 router.get('/:slug', (req, res, next) => {
-	article.getArticle({  
-		content_type: 'blogPost',
-  		'fields.slug': req.params.slug
-	}).then((article) => {
+	article.getArticle(req.params.slug).then((article) => {
 		article = article.items[0];
 		article.fields.article = marked(article.fields.article) + disqus(req.params.id);
-		article.fields.desc = marked(article.fields.article, {
-			renderer: renderer
-		});
+		article.fields.desc = removeMd(article.fields.article);
 		res.render('article', {
 			article: article.fields,
 			toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
