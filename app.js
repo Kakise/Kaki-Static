@@ -8,6 +8,7 @@ const favicon = require('serve-favicon');
 const index = require('./routes/index.js');
 const article = require('./routes/article.js');
 const page = require('./routes/page.js');
+const tags = require('./routes/tags.js');
 const preview = require('./routes/preview.js');
 const minify = require('express-minify');
 const enforce = require('express-sslify');
@@ -56,6 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/article', article);
 app.use('/page', page);
+app.use('/tag', tags);
 app.use('/preview', preview);
 
 // catch 404 and forward to error handler
