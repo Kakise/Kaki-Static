@@ -3,19 +3,14 @@ const router = express.Router();
 const page = require('../services/page.js');
 const marked = require('marked');
 
-// NOT WORKING YET
-/*
 router.get('/:slug', (req, res, next) => {
-	article.getPage(req.params.id).then((page) => {
-		req.post = page.fields;
+	article.getPage(req.params.slug).then((page) => {
+		req.post = page.items[0].fields;
 		req.post.content = marked(req.post.content);
-		if (req.params.slug == req.post.slug) {
-			res.render('page', {
-				'page': req.post
-			});
-		} else {
-
-		}
+		res.render('page', {
+			page: req.post,
+			version: require("../package.json").version
+		});
 	}).catch(error => {
 		console.log(err);
 		var err = new Error(error.message);
@@ -23,5 +18,5 @@ router.get('/:slug', (req, res, next) => {
 		next(err);
 	});
 });
-*/
+
 module.exports = router;
