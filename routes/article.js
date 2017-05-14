@@ -29,16 +29,15 @@ router.get('/:slug', (req, res, next) => {
 		content_type: 'blogPost',
   		'fields.slug': req.params.slug
 	}).then((article) => {
-		req.post = article.fields;
-		req.post.article = marked(req.post.article) + disqus(req.params.id);
-		req.post.desc = marked(req.post.article, {
+		article.fields.article = marked(article.fields.article) + disqus(req.params.id);
+		article.fields.desc = marked(article.fields.article, {
 			renderer: renderer
 		});
-			res.render('article', {
-				article: req.post,
-				toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
-				version: require("../package.json").version
-			});
+		res.render('article', {
+			article: article.fields,
+			toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
+			version: require("../package.json").version
+		});
 	}).catch(error => {
 		const err = new Error(error.message);
 		err.status = 404;
