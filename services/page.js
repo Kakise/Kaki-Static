@@ -1,7 +1,11 @@
 const client = require('./contentfulClient.js').client;
 
-function getPage(id) {
-	return client.getEntry(id)
+function getPage(slug) {
+	const query = {
+		content_type: 'page',
+		'fields.slug': slug
+	};
+	return client.getEntries(query)
 }
 
 module.exports = {
