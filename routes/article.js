@@ -3,7 +3,6 @@ const router = express.Router();
 const article = require('../services/article.js');
 const toRead = require('reading-time');
 const marked = require('marked');
-const removeMd = require('remove-markdown');
 
 function disqus(id) {
 	if (typeof process.env.disqus !== "undefined")
@@ -27,7 +26,7 @@ router.get('/:slug', (req, res, next) => {
 	article.getArticle(req.params.slug).then((article) => {
 		article = article.items[0];
 		article.fields.article = marked(article.fields.article) + disqus(req.params.id);
-		article.fields.desc = removeMd(article.fields.article);
+		article.fields.desc = marked(article.fields.article);
 		res.render('article', {
 			article: article.fields,
 			toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
