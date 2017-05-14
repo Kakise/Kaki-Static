@@ -28,7 +28,7 @@ router.get('/:slug', (req, res, next) => {
 	article.getArticle({  
 		content_type: 'blogPost',
   		'fields.slug[match]': req.params.slug}).then((article) => {
-		req.post = article.fields;
+		req.post = article.fields[0];
 		req.post.article = marked(req.post.article) + disqus(req.params.id);
 		req.post.desc = marked(req.post.article, {
 			renderer: renderer
