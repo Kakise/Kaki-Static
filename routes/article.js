@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const article = require('../services/article.js');
 const toRead = require('reading-time');
+const marked = require('marked');
 const removeMd = require('remove-markdown');
 
 function disqus(id) {
