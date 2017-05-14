@@ -1,6 +1,6 @@
 {
 	"name": "kakistatic",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "Blog engine made in node.js using contentful and heroku.",
 	"main": "app.js",
 	"engines": {
@@ -29,7 +29,7 @@
 		"helmet": "^3.6.0",
 		"jsonwebtoken": "^7.3.0",
 		"marked": "^0.3.6",
-		"marked-plaintext": "^0.0.2",
+		"remove-markdown": "^0.1.0",
 		"morgan": "^1.8.1",
 		"pug": "2.0.0-rc.1",
 		"reading-time": "^1.1.0",
