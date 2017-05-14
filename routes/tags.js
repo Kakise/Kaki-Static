@@ -41,3 +41,5 @@ router.get('/:tag', execQuery, (req, res, next) => {
 		version: require("../package.json").version
 	});
 });
+
+module.exports = router;
