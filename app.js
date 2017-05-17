@@ -15,6 +15,7 @@ const enforce = require('express-sslify');
 const client = require('./services/contentfulClient.js').client;
 const throng = require('throng');
 const nginx = require('./config/nginx.conf.js');
+const fs = require('fs');
 
 // Useful vars
 const port = 3000;
@@ -26,10 +27,13 @@ if (!process.env.TRAVIS) {
 		content_type: 'reverseProxy'
 	}).then(list => {
 		nginx.createConfigFile(list.items); // Sync func
-		throng({
+		let startServ = new Promise(throng({
 			workers: WORKERS,
 			lifetime: 60000,
 			start: startFn
+		}));
+		startServ.then( () => {
+			fs.openSync('/tmp/app-initialized', 'w');
 		});
 	}).catch(error => {
 		console.log(error.message);
