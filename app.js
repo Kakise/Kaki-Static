@@ -27,11 +27,14 @@ if (!process.env.TRAVIS) {
 		content_type: 'reverseProxy'
 	}).then(list => {
 		nginx.createConfigFile(list.items); // Sync func
-		let startServ = new Promise(throng({
-			workers: WORKERS,
-			lifetime: 60000,
-			start: startFn
-		}));
+		let startServ = new Promise((resolve, reject) => {
+			throng({
+				workers: WORKERS,
+				lifetime: 60000,
+				start: startFn
+			});
+			resolve();
+		});
 		startServ.then( () => {
 			fs.openSync('/tmp/app-initialized', 'w');
 		});
