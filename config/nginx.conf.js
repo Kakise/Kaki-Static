@@ -59,7 +59,6 @@ http {
 }
 	`);
 	console.log("Nginx config written");
-	fs.openSync('/tmp/app-initialized', 'w');
 }
 
 module.exports = {
