@@ -36,7 +36,6 @@ if (!process.env.TRAVIS) {
 			resolve();
 		});
 		startServ.then( () => {
-			fs.openSync('/tmp/app-initialized', 'w');
 		});
 	}).catch(error => {
 		console.log(error.message);
@@ -117,6 +116,7 @@ console.log('Node app is running on port', port);
 function startFn(id) {
 	app.listen(port, () => {
 		console.log('[SERVER] Worker: ', id, ' started');
+		fs.openSync('/tmp/app-initialized', 'w');
 	});
 }
 
