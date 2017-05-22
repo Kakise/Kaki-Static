@@ -57,7 +57,7 @@ http {
 		}` + proxyconf + `	
 		
 	}
-}
+
 pagespeed on;
 
 # Needs to exist and be writable by nginx.  Use tmpfs for best performance.
@@ -70,6 +70,7 @@ location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
 }
 location ~ "^/pagespeed_static/" { }
 location ~ "^/ngx_pagespeed_beacon$" { }
+}
 	`);
 	console.log("Nginx config written");
 }
