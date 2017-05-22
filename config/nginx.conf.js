@@ -38,6 +38,7 @@ http {
 	default_type application/octet-stream;
 	sendfile on;
 pagespeed on;
+pagespeed EnableFilters lazyload_images, defer_javascript, inline_images, combine_css, combine_javascript, lazyload_images, resize_images;
 
 # Needs to exist and be writable by nginx.  Use tmpfs for best performance.
 pagespeed FileCachePath /app/config;
