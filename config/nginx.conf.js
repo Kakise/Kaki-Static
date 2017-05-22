@@ -61,7 +61,7 @@ http {
 pagespeed on;
 
 # Needs to exist and be writable by nginx.  Use tmpfs for best performance.
-pagespeed FileCachePath /var/ngx_pagespeed_cache;
+pagespeed FileCachePath /app/config;
 
 # Ensure requests for pagespeed optimized resources go to the pagespeed handler
 # and no extraneous headers get set.
