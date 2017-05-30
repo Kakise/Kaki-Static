@@ -27,7 +27,7 @@ http {
 	gzip_proxied any;
 	gzip_min_length 1100;
 	gzip_buffers 16 8k;
-	gzip_types text/plain text/html text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+	gzip_types *;
 	gzip_disable "MSIE [1-6].(?!.*SV1)";
 	gzip_vary on;
 	server_tokens off;
@@ -58,7 +58,7 @@ http {
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-			pagespeed EnableFilters rewrite_style_attributes,responsive_images_zoom,dedup_inlined_images,collapse_whitespace,extend_cache,rewrite_css,rewrite_javascript,defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
+			pagespeed EnableFilters prioritize_critical_css,rewrite_style_attributes,responsive_images_zoom,dedup_inlined_images,collapse_whitespace,extend_cache,rewrite_css,rewrite_javascript,defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
 			pagespeed LowercaseHtmlNames on;
 		}` + proxyconf + `	
 		location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
