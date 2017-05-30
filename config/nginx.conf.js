@@ -53,7 +53,7 @@ http {
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-			pagespeed EnableFilters defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
+			pagespeed EnableFilters responsive_images_zoom,dedup_inlined_images,collapse_whitespace,extend_cache,rewrite_css,defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
 			pagespeed LowercaseHtmlNames on;
 		}` + proxyconf + `	
 		location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
