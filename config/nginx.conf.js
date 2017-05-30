@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function createConfigFile(array) {
-var proxyconf = "";
+	var proxyconf = "";
 		array.forEach(prox => {
 		proxyconf += `
 		location ${prox.fields.origine} {
@@ -21,10 +21,15 @@ events {
 	worker_connections 1024;
 }
 http {
-  	gzip on;
-  	gzip_comp_level 2;
-  	gzip_min_length 512;
+	gzip on;
+	gzip_comp_level 2;
+	gzip_http_version 1.0;
 	gzip_proxied any;
+	gzip_min_length 1100;
+	gzip_buffers 16 8k;
+	gzip_types text/plain text/html text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+	gzip_disable "MSIE [1-6].(?!.*SV1)";
+	gzip_vary on;
 	server_tokens off;
 	log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
 	access_log logs/nginx/access.log l2met;
@@ -53,7 +58,7 @@ http {
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-			pagespeed EnableFilters responsive_images_zoom,dedup_inlined_images,collapse_whitespace,extend_cache,rewrite_css,defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
+			pagespeed EnableFilters rewrite_style_attributes,responsive_images_zoom,dedup_inlined_images,collapse_whitespace,extend_cache,rewrite_css,rewrite_javascript,defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
 			pagespeed LowercaseHtmlNames on;
 		}` + proxyconf + `	
 		location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
