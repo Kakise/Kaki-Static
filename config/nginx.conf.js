@@ -32,14 +32,14 @@ http {
 	include mime.types;
 	default_type application/octet-stream;
 	sendfile on;
-
-
 	#Must read the body in 5 seconds.
 	client_body_timeout 5;
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
 		keepalive_timeout 5;
+pagespeed on;
+pagespeed FileCachePath /app/config;
     root   /app/public;
     #index  index.html index.htm;
 		location / {
@@ -47,10 +47,7 @@ http {
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-pagespeed on;
 pagespeed EnableFilters defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
-# Needs to exist and be writable by nginx.  Use tmpfs for best performance.
-pagespeed FileCachePath /app/config;
 pagespeed LowercaseHtmlNames on;
 		}` + proxyconf + `	
 		location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
