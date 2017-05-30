@@ -32,14 +32,14 @@ http {
 	include mime.types;
 	default_type application/octet-stream;
 	sendfile on;
-pagespeed on;
-pagespeed FileCachePath /app/config;
 	#Must read the body in 5 seconds.
 	client_body_timeout 5;
 	server {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
 		keepalive_timeout 5;
+pagespeed on;
+pagespeed FileCachePath /app/config;
     root   /app/public;
     #index  index.html index.htm;
 		location / {
