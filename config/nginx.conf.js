@@ -14,7 +14,6 @@ var proxyconf = "";
 		console.log("Proxy "+ prox.fields.log +" added");});
 	fs.writeFileSync("/app/config/nginx.conf.erb", `
 daemon off;
-#Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
 events {
 	use epoll;
@@ -22,9 +21,10 @@ events {
 	worker_connections 1024;
 }
 http {
-  gzip on;
-  gzip_comp_level 2;
-  gzip_min_length 512;
+  	gzip on;
+  	gzip_comp_level 2;
+  	gzip_min_length 512;
+	gzip_proxied any;
 	server_tokens off;
 	log_format l2met 'measure#nginx.service=$request_time request_id=$http_x_request_id';
 	access_log logs/nginx/access.log l2met;
@@ -38,30 +38,29 @@ http {
 		listen <%= ENV["PORT"] %>;
 		server_name _;
 		keepalive_timeout 5;
-pagespeed on;
-pagespeed FileCachePath /app/config;
-pagespeed LoadFromFileMatch "^https?://${process.env.ADDRESS}/" "/app/public/";
-pagespeed LoadFromFileRuleMatch disallow .*;
-pagespeed LoadFromFileRuleMatch allow \.css$;
-pagespeed LoadFromFileRuleMatch allow \.jpe?g$;
-pagespeed LoadFromFileRuleMatch allow \.png$;
-pagespeed LoadFromFileRuleMatch allow \.gif$;
-pagespeed LoadFromFileRuleMatch allow \.js$;
-    root   /app/public;
-    #index  index.html index.htm;
+		pagespeed on;
+		pagespeed FileCachePath /app/config;
+		pagespeed LoadFromFileMatch "^https?://${process.env.ADDRESS}/" "/app/public/";
+		pagespeed LoadFromFileRuleMatch disallow .*;
+		pagespeed LoadFromFileRuleMatch allow \.css$;
+		pagespeed LoadFromFileRuleMatch allow \.jpe?g$;
+		pagespeed LoadFromFileRuleMatch allow \.png$;
+		pagespeed LoadFromFileRuleMatch allow \.gif$;
+		pagespeed LoadFromFileRuleMatch allow \.js$;
+		root   /app/public;
 		location / {
 			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 			proxy_set_header Host $http_host;
 			proxy_redirect off;
 			proxy_pass http://127.0.0.1:3000;
-pagespeed EnableFilters defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
-pagespeed LowercaseHtmlNames on;
+			pagespeed EnableFilters defer_javascript,inline_images,combine_css,combine_javascript,lazyload_images,resize_images;
+			pagespeed LowercaseHtmlNames on;
 		}` + proxyconf + `	
 		location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
-  add_header "" "";
-}
-location ~ "^/pagespeed_static/" { }
-location ~ "^/ngx_pagespeed_beacon$" { }
+  			add_header "" "";
+		}
+		location ~ "^/pagespeed_static/" { }
+		location ~ "^/ngx_pagespeed_beacon$" { }
 	}
 }
 	`);
