@@ -40,6 +40,13 @@ http {
 		keepalive_timeout 5;
 pagespeed on;
 pagespeed FileCachePath /app/config;
+pagespeed LoadFromFileMatch "^https?://${process.env.ADDRESS}/" "/app/public/";
+pagespeed LoadFromFileRuleMatch disallow .*;
+pagespeed LoadFromFileRuleMatch allow \.css$;
+pagespeed LoadFromFileRuleMatch allow \.jpe?g$;
+pagespeed LoadFromFileRuleMatch allow \.png$;
+pagespeed LoadFromFileRuleMatch allow \.gif$;
+pagespeed LoadFromFileRuleMatch allow \.js$;
     root   /app/public;
     #index  index.html index.htm;
 		location / {
