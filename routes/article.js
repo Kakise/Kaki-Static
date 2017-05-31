@@ -29,7 +29,7 @@ router.get('/:slug', (req, res, next) => {
 		article.fields.desc = marked(article.fields.article);
 		res.render('article', {
 			article: article.fields,
-			toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000) - 1, // Return an estimation in minutes
+			toRead: Math.trunc(parseInt(toRead(article.fields.article).time, 10) / 60000), // Return an estimation in minutes
 			version: require("../package.json").version
 		});
 	}).catch(error => {
