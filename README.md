@@ -1,3 +1,6 @@
+## Abandoned project
+Reason: lack of time and needed a complete rewrite.
+
 # Kaki-Static
 [![Code Climate](https://codeclimate.com/github/Kakise/Kaki-Static.png)](https://codeclimate.com/github/Kakise/Kaki-Static) [![Build Status](https://travis-ci.org/Kakise/Kaki-Static.svg?branch=master)](https://travis-ci.org/Kakise/Kaki-Static)  
 More than a blog engine, it's a full featured web server.
